@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clever.mybatis.mapper.ProductMapper">
+    <resultMap id="BaseProduct" type="Product">
+        <result column="product_id" property="productId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="title" property="title"/>
+        <result column="cate_id" property="cateId"/>
+        <result column="content" property="content"/>
+        <result column="price" property="price"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="product.cateId">
+        INSERT INTO product (title, cate_id, content, price)
+        VALUES (#{product.title}, #{product.cateId}, #{product.content}, #{product.price})
+    </insert>
+    <select id="selectAllByCateId" resultMap="BaseProduct">
+        SELECT product_id, create_time, title, cate_id, content, price
+        FROM product
+        WHERE status = 0
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--1.加载外部驱动    url="从网路加载配置文件"  -->
+    <properties resource="db.properties" />
+    <!--2.Mybatis参数配置-->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <!--使用第三方插件来生成日志
+        <setting name="logImpl" value="SLF4J"/>
+        -->
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--开启自动加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--开启驼峰命名映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--3.别名-->
+    <typeAliases>
+        <package name="com.clever.mybatis.entity"/>
+    </typeAliases>
+    <!-- EJB java提出来的企业开发标准 -->
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <!--自带的连接池计数    可以设置为不用连接池-->
+            <dataSource type="POOLED">
+                <!--MySQL数据库驱动-->
+                <property name="driver" value="${db.driverClass}"/>
+                <property name="url" value="${db.url}"/>
+                <property name="username" value="${db.username}"/>
+                <property name="password" value="${db.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="UserMapper.xml"/>
+        <mapper resource="CateMapper.xml"/>
+        <mapper resource="ProductMapper.xml"/>
+    </mappers>
+</configuration>
